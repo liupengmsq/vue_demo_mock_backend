@@ -129,4 +129,27 @@ public class JingdongController {
         return shopHotList;
     }
 
+    @GetMapping("/shop/{id}")
+    public ResultWithData<ShopInfo> getShopInfo(@PathVariable String id) {
+        ResultWithData<ShopInfo> result = new ResultWithData<>();
+        ShopHotList allShops = getShopHotList();
+        ShopInfo found = null;
+        for(ShopInfo shop: allShops.getData()) {
+            if(shop.getId().equals(id)) {
+                found = shop;
+                break;
+            }
+        }
+
+        if(found == null) {
+            result.setErrorno(1);
+            result.setMessage("找不到对应的店铺信息！！");
+            return result;
+        }
+
+        result.setErrorno(0);
+        result.setData(found);
+        return result;
+    }
+
 }
