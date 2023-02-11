@@ -12,6 +12,7 @@ public class ShopInfo {
     private Integer expressPrice;
     private String slogan;
     private List<ShopTag> tags = new ArrayList<>();
+    private List<ProductInfo> products = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -92,6 +93,18 @@ public class ShopInfo {
 
     public void addTag(ShopTag tag) {
         this.tags.add(tag);
+    }
+
+    public List<ProductInfo> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductInfo> products) {
+        this.products = products;
+    }
+
+    public void addProdInfo(ProductInfo productInfo) {
+        this.products.add(productInfo);
     }
 
 }

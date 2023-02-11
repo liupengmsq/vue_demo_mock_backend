@@ -4,6 +4,8 @@ package pengliu.me.forfrontend.controller;
 import org.springframework.web.bind.annotation.*;
 import pengliu.me.forfrontend.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
@@ -132,15 +134,7 @@ public class JingdongController {
     @GetMapping("/shop/{id}")
     public ResultWithData<ShopInfo> getShopInfo(@PathVariable String id) {
         ResultWithData<ShopInfo> result = new ResultWithData<>();
-        ShopHotList allShops = getShopHotList();
-        ShopInfo found = null;
-        for(ShopInfo shop: allShops.getData()) {
-            if(shop.getId().equals(id)) {
-                found = shop;
-                break;
-            }
-        }
-
+        ShopInfo found = getShopInfoFromShopHotList(id);
         if(found == null) {
             result.setErrorno(1);
             result.setMessage("找不到对应的店铺信息！！");
@@ -152,4 +146,67 @@ public class JingdongController {
         return result;
     }
 
+    @GetMapping("/shop/{id}/products")
+    public ResultWithData<List<ProductInfo>> getProdInfo(@PathVariable String id, @RequestParam("tab") String productType) {
+        ResultWithData<List<ProductInfo>> ret = new ResultWithData<>();
+        ShopInfo found = getShopInfoFromShopHotList(id);
+        if(found == null) {
+            ret.setErrorno(123);
+            ret.setMessage("找不到对应的店铺信息！！！");
+            return ret;
+        }
+
+        ProductInfo productInfo = new ProductInfo();
+        productInfo.setId("1");
+        productInfo.setImageUrl("near.png");
+        productInfo.setName(String.format("番茄250g/份 for %s-%s", id, productType));
+        productInfo.setSales(10);
+        productInfo.setPrice(33.6);
+        productInfo.setOldPrice(43.6);
+        found.addProdInfo(productInfo);
+
+        productInfo = new ProductInfo();
+        productInfo.setId("2");
+        productInfo.setImageUrl("医药健康.png");
+        productInfo.setName(String.format("提子330g/份 for %s-%s", id, productType));
+        productInfo.setSales(13);
+        productInfo.setPrice(34.6);
+        productInfo.setOldPrice(41.6);
+        found.addProdInfo(productInfo);
+
+        productInfo = new ProductInfo();
+        productInfo.setId("3");
+        productInfo.setImageUrl("家居.png");
+        productInfo.setName(String.format("橘子120g/份 for %s-%s", id, productType));
+        productInfo.setSales(19);
+        productInfo.setPrice(34.6);
+        productInfo.setOldPrice(41.6);
+        found.addProdInfo(productInfo);
+
+        productInfo = new ProductInfo();
+        productInfo.setId("4");
+        productInfo.setImageUrl("水果店.png");
+        productInfo.setName(String.format("葡萄980g/份 for %s-%s", id, productType));
+        productInfo.setSales(23);
+        productInfo.setPrice(84.6);
+        productInfo.setOldPrice(48.6);
+        found.addProdInfo(productInfo);
+
+        ret.setData(found.getProducts());
+        ret.setErrorno(0);
+
+        return ret;
+    }
+
+    private ShopInfo getShopInfoFromShopHotList(String id) {
+        ShopHotList allShops = getShopHotList();
+        ShopInfo found = null;
+        for(ShopInfo shop: allShops.getData()) {
+            if(shop.getId().equals(id)) {
+                found = shop;
+                break;
+            }
+        }
+        return found;
+    }
 }
