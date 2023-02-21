@@ -157,7 +157,7 @@ public class JingdongController {
         }
 
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setId("1");
+        productInfo.setId(id + "_" + "1");
         productInfo.setImageUrl("near.png");
         productInfo.setName(String.format("番茄250g/份 for %s-%s", id, productType));
         productInfo.setSales(10);
@@ -166,7 +166,7 @@ public class JingdongController {
         found.addProdInfo(productInfo);
 
         productInfo = new ProductInfo();
-        productInfo.setId("2");
+        productInfo.setId(id + "_" + "2");
         productInfo.setImageUrl("医药健康.png");
         productInfo.setName(String.format("提子330g/份 for %s-%s", id, productType));
         productInfo.setSales(13);
@@ -175,7 +175,7 @@ public class JingdongController {
         found.addProdInfo(productInfo);
 
         productInfo = new ProductInfo();
-        productInfo.setId("3");
+        productInfo.setId(id + "_" + "3");
         productInfo.setImageUrl("家居.png");
         productInfo.setName(String.format("橘子120g/份 for %s-%s", id, productType));
         productInfo.setSales(19);
@@ -184,7 +184,7 @@ public class JingdongController {
         found.addProdInfo(productInfo);
 
         productInfo = new ProductInfo();
-        productInfo.setId("4");
+        productInfo.setId(id + "_" + "4");
         productInfo.setImageUrl("水果店.png");
         productInfo.setName(String.format("葡萄980g/份 for %s-%s", id, productType));
         productInfo.setSales(23);
