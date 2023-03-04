@@ -209,4 +209,13 @@ public class JingdongController {
         }
         return found;
     }
+
+    @PostMapping("/order")
+    public Result createOrder(@RequestBody OrderConfirmDTO orderConfirmDTO) {
+        System.out.println(orderConfirmDTO.toString());
+        Result result = new Result();
+        result.setErrorno(0);
+        result.setMessage("");
+        return result;
+    }
 }
