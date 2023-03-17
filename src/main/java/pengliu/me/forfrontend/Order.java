@@ -1,7 +1,5 @@
 package pengliu.me.forfrontend;
 
-import com.sun.tools.corba.se.idl.constExpr.Or;
-
 public class Order {
     private Integer id;
     private String name;
